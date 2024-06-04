@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <style>
+        .mb-4 {
+            margin-bottom: 0 !important;
+        }
+        .mt-5 {
+            margin-top: 0 !important;
+        }
+        .middle {
+            margin: 32.1vh auto;
+        }
+    </style>
+    <section class="vh-100 openSans" style="background-color: #eeee;">
+    <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-lg-12 col-xl-11">
+    <div class="card text-black" style="border-radius: 25px;">
+    <div class="card-body p-md-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit Post!</p>
+
+        <div class="col-md-6 offset-md-3">
+            <form method="post" action="{{ path('update_product', {'id': product.id}) }}">
+            {{ form(productForm) }}
+            <div class="form-group">
+
+
+                <button class="btn btn-info mt-2 text-white" onclick="window.location='{{ path('All_products') }}'">Cancel</button>
+            </div>
+            {{ form_end(productForm) }}
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

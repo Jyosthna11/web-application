@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="panel-heading">
+        <form action="{{ path('All_products') }}" method="get">
+            <select name="category" onchange="this.form.submit()">
+                <option value="">Select category</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == selectedCategoryId %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <h3 class="text-center">View Post</h3>
+    </div>
+
+
+<div class="container">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <div class="mx-auto w-4/5 my-8">
+    {% if app.user %}
+        <a href="/products/add" class="uppercase border border-gray-500text-lg py-4 px-6
+        rounded bg-gray-800 text-white">
+            <button id="Create New Post" aria-label="right">Create New Post</button>
+        </a>
+    {% endif %}
+</div>
+    <div class="row">
+        {% for Data in products %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ asset('uploads/' ~ Data.imagepath) }}" alt="{{ Data.name }}" style="max-width: 200px; height: auto;" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ Data.name }}</h5>
+                        <p class="card-text">{{ Data.description }}</p>
+                        <p class="card-text">{{ Data.price }}</p>
+
+                        <div class="d-flex justify-content-between align-item-center">
+                            <a href="{{ path('view_product', {id: Data.id}) }}" class="btn btn-dark">
+                                View details
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

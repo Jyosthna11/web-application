@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Quick Kart!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" >
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+    </head>
+    <body>
+    {% block header %}
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" style="color: crimson">MarketPlace</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ path('home') }}">Home</a></li>
+
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('All_products') }}">All Products</a></li>
+                    <li><a href="{{ path('registration') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="{{ path('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+                    {% else %}
+                        <li>
+                            <a href="/{{ app.user ? 'logout' : 'login' }}"
+                            @click="isOpen=false">
+                                {{ app.user ? 'Logout': 'Login' }}
+
+                            </a>
+                          <li><a href="{{ path('All_products') }}">All Products</a></li>
+                           <li><a href="{{ path('add_products') }}">Add Products</a></li>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </div>
+
+        </nav>
+    {% endblock %}
+
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block javascripts %}{% endblock %}
+    </body>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+</html>
