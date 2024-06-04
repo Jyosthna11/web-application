@@ -1,0 +1,21 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+registration:
+    path: '/registration'
+    controller: App\Controller\RegistrationController::registration
+
+home:
+    path: '/home'
+    controller: App\Controller\HomeController::home
+login:
+    path: '/login'
+    controller: App\Controller\SecurityController::login
+products:
+    path: '/products'
+    controller: App\Controller\ProductsController::products
+
+
+
